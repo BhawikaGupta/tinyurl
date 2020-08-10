@@ -39,7 +39,7 @@ public class TinyUrlController {
             value = "/getShortenedURL",
             method = POST,
             headers = "Accept=application/json")
-    ResponseEntity<?> getShortenedURL(@RequestBody Map<String, String> payload) throws Exception {
+    ResponseEntity<UrlResponseEntity> getShortenedURL(@RequestBody Map<String, String> payload) throws Exception {
         String long_url = payload.get("long_url");
         String client_id = payload.get("client_id");
         if (StringUtils.isEmpty(long_url)) {
@@ -67,7 +67,7 @@ public class TinyUrlController {
             value = "/getHitCount",
             method = POST,
             headers = "Accept=application/json")
-    ResponseEntity<?> getHitCount(@RequestBody Map<String, String> payload) throws Exception {
+    ResponseEntity<HitUrlResponseEntity> getHitCount(@RequestBody Map<String, String> payload) throws Exception {
         String short_url = payload.get("short_url");
 
         if (StringUtils.isEmpty(short_url)) {
@@ -76,7 +76,7 @@ public class TinyUrlController {
         Integer hitCount = repository.getHitCount(short_url);
 
         HitUrlResponseEntity hitUrlResponseEntity = new HitUrlResponseEntity("SUCCESS", hitCount);
-        return new ResponseEntity<>(hitUrlResponseEntity, HttpStatus.OK);
+        return new ResponseEntity<HitUrlResponseEntity>(hitUrlResponseEntity, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Take long URL and return a much shorter URL", response = String.class)
