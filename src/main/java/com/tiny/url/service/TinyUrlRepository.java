@@ -24,18 +24,13 @@ public class TinyUrlRepository {
     }
 
     public String getShortenedURL(String long_url, String client_id) {
-        try {
-            Optional<Url> response = urlRepository.findByLongUrlAndClientId(long_url, client_id);
-            if (response.isPresent()) {
-                Url responseUrl = response.get();
-                return "http://localhost:8345/tinyUrl/" + responseUrl.getShortUrl();
-            }
-            else {
-                return createNewUrl(long_url, client_id);
-            }
+       Optional<Url> response = urlRepository.findByLongUrlAndClientId(long_url, client_id);
+        if (response.isPresent()) {
+            Url responseUrl = response.get();
+            return "http://localhost:8345/tinyUrl/" + responseUrl.getShortUrl();
         }
-        catch (Exception ex) {
-            throw new RuntimeException(ex.getMessage());
+        else {
+            return createNewUrl(long_url, client_id);
         }
     }
 

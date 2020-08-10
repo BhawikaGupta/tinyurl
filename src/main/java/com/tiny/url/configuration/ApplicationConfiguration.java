@@ -25,7 +25,7 @@ public class ApplicationConfiguration {
                 .build();
     }
 
-    /*public static void dropExisitingTables() {
+    public static void dropExisitingTables() {
 
         Connection connection = null;
         Statement stmt = null;
@@ -34,13 +34,15 @@ public class ApplicationConfiguration {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:tinyurl.db");
             stmt = connection.createStatement();
-            String sql = "DROP TABLE IF EXISTS customer;";
+            String sql = "DROP TABLE IF EXISTS url;";
             stmt.executeUpdate(sql);
+            System.out.println( "Table dropped");
+
             stmt.close();
         }
         catch ( Exception e ) {
             System.out.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-    }*/
+    }
 }
